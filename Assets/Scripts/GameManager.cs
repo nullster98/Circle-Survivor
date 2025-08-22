@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public UIManager ui;
     public LevelUpPanel levelUpPanel;
+    public AudioSource bgm;
 
     void Awake()
     {
@@ -137,6 +138,7 @@ public class GameManager : MonoBehaviour
         SwitchUI(State.Playing);
         ScoreManager.Instance.ResetRun();
         ui?.ResetTimer();
+        bgm.Play();
     }
 
     public void Btn_Restart()
@@ -174,6 +176,7 @@ public class GameManager : MonoBehaviour
 
         ui?.ShowGameOver(ScoreManager.Instance.Score, ScoreManager.Instance.Kills, timeStr, player?.level ?? 1);
         ScoreManager.Instance.TryCommitBest(t);
+        bgm.Stop();
     }
 
     public void ResumeFromLevelUp()
